@@ -5,136 +5,281 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Son Bir Şans, Bizim İçin ❤️</title>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
 <style>
 * { box-sizing: border-box; }
+
 body {
-    margin: 0; padding: 0;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #89cff0 0%, #d6f0ff 100%);
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; overflow-x: hidden; position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
 }
+
 .heart-bg {
-    position: fixed; color: rgba(255,255,255,.55); font-size: 22px;
-    animation: floatUp 6s linear infinite; z-index: 1; pointer-events: none;
+    position: fixed;
+    color: rgba(255,255,255,.7);
+    font-size: 22px;
+    animation: floatUp 6s linear infinite;
+    z-index: 1;
+    pointer-events: none;
 }
+
 @keyframes floatUp {
     0% { transform: translateY(100vh) scale(.8); opacity: 1; }
     100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
 }
+
 .card {
-    background: white; padding: 35px 28px; border-radius: 24px;
-    box-shadow: 0 15px 35px rgba(0,0,0,.15); text-align: center;
-    max-width: 520px; width: 92%; position: relative; z-index: 10;
+    background: white;
+    padding: 35px 28px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.15);
+    text-align: center;
+    max-width: 520px;
+    width: 92%;
+    position: relative;
+    z-index: 10;
     margin: 20px 0;
 }
-.envelope-icon { font-size: 50px; margin-bottom: 10px; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+.envelope-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
 h2 { color: #333; margin-bottom: 16px; font-size: 24px; }
+
 .question-box {
-    background: #fff5f6; padding: 18px 20px; border-radius: 14px;
-    border: 1px dashed #ff9a9e; color: #555; font-size: 15px;
-    line-height: 1.8; margin-bottom: 28px;
+    background: #f0f8ff;
+    padding: 18px 20px;
+    border-radius: 14px;
+    border: 1px dashed #78bce8;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 28px;
 }
+
 .btn-container {
-    display: flex; flex-direction: column; gap: 12px;
-    align-items: center; min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    min-height: 160px;
 }
+
 button, .wp-link {
-    width: 100%; max-width: 280px; padding: 13px 20px;
-    font-size: 15px; font-weight: bold; border: none;
-    border-radius: 50px; cursor: pointer; text-decoration: none;
+    width: 100%;
+    max-width: 280px;
+    padding: 13px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
     display: inline-block;
 }
-#yesBtn { background-color: #ff4b5c; color: white; box-shadow: 0 4px 15px rgba(255,75,92,.4); }
-#angryBtn { background-color: #ff9a9e; color: white; box-shadow: 0 4px 15px rgba(255,154,158,.4); }
+
+#yesBtn {
+    background-color: #2196d2;
+    color: white;
+    box-shadow: 0 4px 15px rgba(33,150,210,.4);
+    transition: transform .15s ease;
+}
+
+#yesBtn:hover { transform: scale(1.03); background-color: #147db5; }
+
+#angryBtn {
+    background-color: #78bce8;
+    color: white;
+    box-shadow: 0 4px 15px rgba(120,188,232,.4);
+    transition: transform .15s ease;
+}
+
+#angryBtn:hover { transform: scale(1.03); background-color: #5ca9dc; }
+
 #noBtn {
-    background-color: #e0e0e0; color: #555; position: relative;
-    z-index: 999; user-select: none; transition: top .4s, left .4s;
+    background-color: #dceaf2;
+    color: #456273;
+    position: relative;
+    z-index: 999;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: top .5s cubic-bezier(.25,1,.5,1), left .5s cubic-bezier(.25,1,.5,1);
 }
-#detailScreen, #happyScreen { display: none; }
+
+#detailScreen, #happyScreen { display: none; text-align: center; }
+
 .photo-container {
-    width: 100%; height: 350px; border-radius: 18px; overflow: hidden;
-    margin-bottom: 20px; box-shadow: 0 6px 16px rgba(0,0,0,.12);
-    background: #f0f0f0;
+    width: 100%;
+    height: 350px;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.12);
+    background-color: #f0f0f0;
 }
-.photo-container img { width: 100%; height: 100%; object-fit: cover; display: none; }
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    transition: opacity .5s ease-in-out;
+}
+
 .photo-container img.active { display: block; }
-.accordion-wrapper { margin-bottom: 20px; border-radius: 12px; overflow: hidden; border: 1px solid #ffccd5; }
+
+.accordion-wrapper {
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #b9def5;
+}
+
 .accordion-header {
-    background: #ff4b5c; color: white; padding: 14px 18px;
-    font-weight: bold; cursor: pointer; display: flex; justify-content: space-between;
+    background: #2196d2;
+    color: white;
+    padding: 14px 18px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: background .3s ease;
 }
+
+.accordion-header:hover { background: #147db5; }
+
 .accordion-content {
-    max-height: 0; overflow: hidden; background: #fff5f6;
-    transition: max-height .4s ease, padding .3s ease;
-    text-align: left; font-size: 14.5px; color: #444;
-    padding: 0 18px; line-height: 1.8;
+    max-height: 0;
+    overflow: hidden;
+    background: #f0f8ff;
+    transition: max-height .4s ease-out, padding .3s ease;
+    text-align: left;
+    font-size: 14.5px;
+    color: #444;
+    padding: 0 18px;
+    line-height: 1.8;
 }
-.accordion-wrapper.open .accordion-content { max-height: 300px; padding: 15px 18px; }
+
+.accordion-wrapper.open .accordion-content {
+    max-height: 300px;
+    padding: 15px 18px;
+}
+
+.accordion-content div { margin-bottom: 8px; }
+.accordion-content div:last-child { margin-bottom: 0; }
+
 .letter-box {
-    background: #fafafa; padding: 18px 20px; border-radius: 12px;
-    border: 1px dashed #ff9a9e; text-align: left; font-size: 15px;
-    color: #444; line-height: 1.8; white-space: pre-line;
+    background: #f7fbff;
+    padding: 18px 20px;
+    border-radius: 12px;
+    border: 1px dashed #78bce8;
+    text-align: left;
+    font-size: 15px;
+    color: #444;
+    line-height: 1.8;
+    white-space: pre-line;
 }
+
 .happy-photo-container {
-    width: 100%; height: 350px; border-radius: 20px;
-    overflow: hidden; margin-bottom: 18px;
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.18);
 }
-.happy-photo-container img { width: 100%; height: 100%; object-fit: cover; }
+
+.happy-photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .badge-box {
-    background: #fff8e7; border: 2px dashed #ffd166;
-    padding: 12px; border-radius: 12px; color: #b57c00;
-    font-weight: bold; font-size: 14.5px; margin-bottom: 15px;
+    background: #eef8ff;
+    border: 2px dashed #78bce8;
+    padding: 12px;
+    border-radius: 12px;
+    color: #287eae;
+    font-weight: bold;
+    font-size: 14.5px;
+    margin-bottom: 15px;
 }
+
 .ticket {
-    background: linear-gradient(135deg,#ff758c,#ff7eb3);
-    color: white; padding: 18px; border-radius: 16px;
-    text-align: left; margin-bottom: 20px;
+    background: linear-gradient(135deg, #2196d2 0%, #70c5f0 100%);
+    color: white;
+    padding: 18px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(33,150,210,.3);
+    text-align: left;
+    margin-bottom: 20px;
+    position: relative;
 }
+
 .ticket h3 {
-    margin: 0 0 12px; font-size: 17px; text-align: center;
-    border-bottom: 1px dashed white; padding-bottom: 8px;
+    margin: 0 0 12px;
+    font-size: 17px;
+    text-align: center;
+    border-bottom: 1px rgba(255,255,255,.4) dashed;
+    padding-bottom: 8px;
 }
+
 .ticket div { font-size: 13.5px; margin-bottom: 8px; }
+
 .wp-btn {
-    background-color: #25d366; color: white;
-    box-shadow: 0 4px 15px rgba(37,211,102,.4); margin-top: 5px;
+    background-color: #25d366;
+    color: white;
+    box-shadow: 0 4px 15px rgba(37,211,102,.4);
+    margin-top: 5px;
 }
+
+.wp-btn:hover { background-color: #1ebc57; }
+
 </style>
 </head>
+
 <body>
+
 <div id="heartContainer"></div>
+
 <div class="card">
 
 <div id="questionScreen">
     <div class="envelope-icon">💌</div>
     <h2>Sana Söylemek İstediğim Bir Şey Var... ❤️</h2>
+
     <div class="question-box">
-        Biliyorum, son zamanlarda ikimiz de yorulduk.
-        Belki birbirimizi kırdık, belki yanlış anladık,
-        belki de ikimiz de hatalar yaptık.
+        Biliyorum, son zamanlarda ikimiz de yorulduk. Belki birbirimizi kırdık, belki yanlış anladık, belki de ikimiz de hatalar yaptık. Ama bütün bunlara rağmen ben senden, bizden vazgeçmek istemiyorum.Sen artık pes etmeye yaklaşmış olabilirsin ama benim içimde hâlâ bizi kurtarabileceğimize dair küçücük de olsa bir umut var.
 
-        Ama bütün bunlara rağmen ben senden,
-        bizden vazgeçmek istemiyorum.
+        Ben mükemmel bir ilişki istemiyorum. Hatalarımızı kabul edebildiğimiz, birbirimizi dinlediğimiz, anlamaya çalıştığımız ve her şeye rağmen el ele kalabildiğimiz bir ilişki istiyorum.
 
-        Sen artık pes etmeye yaklaşmış olabilirsin
-        ama benim içimde hâlâ bizi kurtarabileceğimize
-        dair küçücük de olsa bir umut var.
-
-        Ben mükemmel bir ilişki istemiyorum.
-        Hatalarımızı kabul edebildiğimiz, birbirimizi
-        dinlediğimiz, anlamaya çalıştığımız ve her şeye
-        rağmen el ele kalabildiğimiz bir ilişki istiyorum.
-
-        Her şeyi unutalım demiyorum.
-        Sadece birbirimizi kaybetmeden önce,
-        bir kez daha denememizi istiyorum.
+        Her şeyi unutalım demiyorum. Sadece birbirimizi kaybetmeden önce, bir kez daha denememizi istiyorum.
 
         Çünkü ben hâlâ seni, hâlâ bizi seçiyorum.
 
         Peki ya sen, bizim için bir şans daha verir misin? 🥺❤️
     </div>
+
     <div class="btn-container">
         <button id="yesBtn" onclick="onYesClick()">Bir Şans Daha Verelim ❤️</button>
         <button id="angryBtn" onclick="openDetails()">Kafam Çok Karışık... 🥺</button>
@@ -144,16 +289,19 @@ button, .wp-link {
 
 <div id="detailScreen">
     <h2>Belki Biraz Düşünürsün... 🥺❤️</h2>
+
     <div class="photo-container">
         <img src="foto1.jpeg" class="active" alt="Birlikte anımız">
         <img src="foto2.jpeg" alt="Birlikte anımız">
         <img src="foto3.jpeg" alt="Birlikte anımız">
     </div>
+
     <div class="accordion-wrapper" id="karneAccordion">
         <div class="accordion-header" onclick="toggleKarne()">
             <span>❤️ Bizim İçin Birkaç Gerçek</span>
             <span id="arrowIcon">▼</span>
         </div>
+
         <div class="accordion-content">
             <div>💔 <b>İkimizin de hataları:</b> Var, inkâr etmiyorum.</div>
             <div>🥺 <b>Kaybetme korkum:</b> Çok büyük.</div>
@@ -162,20 +310,18 @@ button, .wp-link {
             <div>🌹 <b>Tek dileğim:</b> Bizden vazgeçmemek.</div>
         </div>
     </div>
+
     <div class="letter-box">
-Aşkım...
+Hayatım...
 
-Sana bunları yazarken (ayrıca bunları yapmaya çalışırken) bile ne kadar zorlandığımı anlatamam.
-Seni suçlamak için burada değilim. Çünkü biliyorum, sadece senin hataların yok. Benim de yanlışlarım oldu. Belki seni anlamadığım, belki seni dinlemediğim, belki de farkında olmadan kalbini kırdığım zamanlar oldu.
-Ama inan, hiçbiri istediğim için değil değil.
+Sana bunları yazarken bile (ayrıca bunları yapmaya çalışırken) ne kadar zorlandığımı anlatamam.
+Seni suçlamak için burada değilim. Çünkü biliyorum, sadece senin hataların yok. Benim de yanlışlarım oldu. Belki seni anlamadığım, belki seni dinlemediğim, belki de farkında olmadan kalbini kırdığım zamanlar oldu. Ama inan, hiçbiri istediğim için değil değil.
+
+Aslında seni ve ilişkimizi bu kadar önemsediğim için hâlâ uğraşmak istiyorum. Sen pes etmeye yaklaşırken benim hâlâ bir yol bulmaya çalışmamın sebebi, sana olan sevgim kadar birlikte kurduğumuz hayallere de inanmam. Ben senden her şeyi tek başına düzeltmeni beklemiyorum. Beni anlamanı, görmeni, yargılamamanı ve dürüst olmanı bekliyorum. Ben de çabalamaya, değişmeye, hatalarımı görmeye ve seni daha iyi anlamaya hazırım. İkimiz de istersek bazı şeyleri düzeltebiliriz. Belki eskisinden bile daha güzel olabiliriz.
+
+Senden tek isteğim, her şey bitmeden önce bize bir şans daha vermeyi düşünmen. 
         
-Tam aksine, seni ve ilişkimizi bu kadar önemsediğim için hâlâ uğraşmak istiyorum. Sen pes etmeye yaklaşırken benim hâlâ bir yol bulmaya çalışmamın sebebi, sana olan sevgim kadar birlikte kurduğumuz hayallere de inanmam. Ben senden her şeyi tek başına düzeltmeni beklemiyorum. Beni anlamanı, görmeni ve yargılamamanı bekliyorum. Ben de çabalamaya, değişmeye, hatalarımı görmeye ve seni daha iyi anlamaya hazırım. İkimiz de istersek bazı şeyleri düzeltebiliriz. Belki eskisinden bile daha güzel olabiliriz.
-
-Senden tek isteğim, her şey bitmeden önce bize bir şans daha vermeyi düşünmen.
-
-Ben kolayca vazgeçmek istemiyorum çünkü benim için sen, vazgeçilecek biri değil, uğruna emek verilecek birisin. Umarım bende senin için öyle biriyimdir.
-
-Hâlâ elini tutmak, seninle gülmek, hayaller kurmak ve yarınlarımızda birbirimizi görmek istiyorum.
+Ben kolayca vazgeçmek istemiyorum çünkü benim için sen, vazgeçilecek biri değil, uğruna emek verilecek birisin. Umarım bende senin için öyle biriyimdir. Hâlâ elini tutmak, seninle gülmek, hayaller kurmak ve yarınlarımızda birbirimizi görmek istiyorum.
 
 Ben hâlâ buradayım.
 Hâlâ seni seviyorum.
@@ -185,10 +331,15 @@ Hâlâ BİZ diyorum. ❤️
 
 <div id="happyScreen">
     <h2>Belki de Her Şey Yeniden Başlar... ❤️</h2>
+
     <div class="happy-photo-container">
         <img src="mutlu-foto.jpeg" alt="En güzel anımız">
     </div>
-    <div class="badge-box">🏆 BİZİM İÇİN BİR ŞANS DAHA! ❤️</div>
+
+    <div class="badge-box">
+        🏆 BİZİM İÇİN BİR ŞANS DAHA! ❤️
+    </div>
+
     <div class="ticket">
         <h3>🎟️ YENİDEN BİZ BİLETİ</h3>
         <div>❤️ <b>Bilet Sahipleri:</b> İkimiz</div>
@@ -197,6 +348,7 @@ Hâlâ BİZ diyorum. ❤️
         <div>💋 <b>Ekstra:</b> Bolca Sarılma ve Öpücük</div>
         <div>🌹 <b>En Önemlisi:</b> Birbirimizden Vazgeçmemek</div>
     </div>
+
     <p style="font-size:14px;color:#666;line-height:1.7;">
         Beni yeniden seçtiğin için değil,
         bizi yeniden denemeye değer gördüğün için
@@ -205,39 +357,42 @@ Hâlâ BİZ diyorum. ❤️
         Bu kez sadece sevmekle kalmayalım,
         birbirimizi anlamayı da öğrenelim. ❤️
     </p>
+
     <a href="https://wa.me/?text=Bizim%20i%C3%A7in%20bir%20%C5%9Fans%20daha%20vermek%20istiyorum.%20Hadi%20birbirimizi%20yeniden%20anlamaya%20%C3%A7al%C4%B1%C5%9Falim.%20%E2%9D%A4%EF%B8%8F"
        target="_blank" rel="noopener" class="wp-link wp-btn">
        💬 Sana Bir Mesajım Var ❤️
     </a>
 </div>
+
 </div>
 
 <script>
 const noBtn = document.getElementById('noBtn');
 
 const heartContainer = document.getElementById('heartContainer');
-const hearts = ['❤️','💖','💕','💗','🌸'];
+const hearts = ['❤️','💖','💕','💗','💙','🩵'];
 
-for (let i = 0; i < 16; i++) {
+for(let i=0; i<16; i++) {
     const heart = document.createElement('div');
     heart.className = 'heart-bg';
-    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-    heart.style.animationDelay = Math.random() * 5 + 's';
+    heart.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+    heart.style.left = Math.random()*100+'vw';
+    heart.style.animationDuration = (Math.random()*3+4)+'s';
+    heart.style.animationDelay = Math.random()*5+'s';
     heartContainer.appendChild(heart);
 }
 
 function moveButton(e) {
-    if (e) e.preventDefault();
+    if(e) e.preventDefault();
+
     noBtn.style.position = 'fixed';
 
     const padding = 40;
-    const maxX = Math.max(padding, window.innerWidth - noBtn.offsetWidth - padding);
-    const maxY = Math.max(padding, window.innerHeight - noBtn.offsetHeight - padding);
+    const maxX = Math.max(padding, window.innerWidth-noBtn.offsetWidth-padding);
+    const maxY = Math.max(padding, window.innerHeight-noBtn.offsetHeight-padding);
 
-    noBtn.style.left = Math.floor(Math.random() * (maxX - padding + 1) + padding) + 'px';
-    noBtn.style.top = Math.floor(Math.random() * (maxY - padding + 1) + padding) + 'px';
+    noBtn.style.left = Math.floor(Math.random()*(maxX-padding+1)+padding)+'px';
+    noBtn.style.top = Math.floor(Math.random()*(maxY-padding+1)+padding)+'px';
 }
 
 let photoInterval = null;
@@ -250,12 +405,12 @@ function openDetails() {
     let currentPhoto = 0;
     const photos = document.querySelectorAll('.photo-container img');
 
-    if (photos.length > 0 && !photoInterval) {
+    if(photos.length > 0 && !photoInterval) {
         photoInterval = setInterval(() => {
             photos[currentPhoto].classList.remove('active');
-            currentPhoto = (currentPhoto + 1) % photos.length;
+            currentPhoto = (currentPhoto+1)%photos.length;
             photos[currentPhoto].classList.add('active');
-        }, 2500);
+        },2500);
     }
 }
 
@@ -264,17 +419,23 @@ function onYesClick() {
     document.getElementById('happyScreen').style.display = 'block';
     noBtn.style.display = 'none';
 
-    if (typeof confetti === 'function') {
-        confetti({ particleCount: 180, spread: 100, origin: { y: 0.6 } });
+    if(typeof confetti === 'function') {
+        confetti({
+            particleCount:180,
+            spread:100,
+            origin:{y:0.6}
+        });
     }
 }
 
 function toggleKarne() {
     const accordion = document.getElementById('karneAccordion');
     const arrow = document.getElementById('arrowIcon');
+
     accordion.classList.toggle('open');
     arrow.textContent = accordion.classList.contains('open') ? '▲' : '▼';
 }
 </script>
+
 </body>
 </html>
